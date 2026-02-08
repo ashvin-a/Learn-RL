@@ -3,7 +3,6 @@ from collections import defaultdict
 import numpy as np
 from tqdm import tqdm  # Progress bar
 import pickle
-import pandas as pd
 
 
 class CartPoleAgent:
@@ -108,105 +107,62 @@ class CartPoleAgent:
         """Reduce exploration rate after each episode."""
         self.epsilon = max(self.final_epsilon, self.epsilon - self.epsilon_decay)
 
+if __name__ == "__main__":
+    # Create our training environment - a cart with a pole that needs balancing
+    number_of_episodes = 100000
+    env = gym.make("CartPole-v1")
+    env = gym.wrappers.RecordEpisodeStatistics(env, buffer_length=number_of_episodes)
 
-# Create our training environment - a cart with a pole that needs balancing
-number_of_episodes = 40000
-env = gym.make("CartPole-v1")
-env = gym.wrappers.RecordEpisodeStatistics(env, buffer_length=number_of_episodes)
-
-# Reset environment to start a new episode
-observation, info = env.reset()
-# observation: what the agent can "see" - cart position, velocity, pole angle, etc.
-# info: extra debugging information (usually not needed for basic learning)
-
-print(f"Starting observation: {observation}")
-# Example output: [ 0.01234567 -0.00987654  0.02345678  0.01456789]
-# [cart_position, cart_velocity, pole_angle, pole_angular_velocity]
-
-
-# * Lets train this son of a gun
-cartpole_agent = CartPoleAgent(
-    env=env,
-    learning_rate=0.01,
-    initial_epsilon=1.0,
-    epsilon_decay=(
-        1.0 / (number_of_episodes / 2)
-    ),  # (initial_epsilon/(number_of_episodes/2))
-    final_epsilon=0.1,
-    discount_factor=0.95,
-)
-
-for episode in tqdm(range(number_of_episodes)):
-
+    # Reset environment to start a new episode
     observation, info = env.reset()
-    done = False
+    # observation: what the agent can "see" - cart position, velocity, pole angle, etc.
+    # info: extra debugging information (usually not needed for basic learning)
 
-    while not done:
-        action = cartpole_agent.get_action(obs=observation)
+    print(f"Starting observation: {observation}")
+    # Example output: [ 0.01234567 -0.00987654  0.02345678  0.01456789]
+    # [cart_position, cart_velocity, pole_angle, pole_angular_velocity]
 
-        next_observation, reward, terminated, truncated, info = env.step(action=action)
-
-        cartpole_agent.update(
-            obs=observation,
-            action=action,
-            reward=reward,
-            terminated=terminated,
-            next_obs=next_observation,
-        )
-
-        done = terminated or truncated
-        observation = next_observation
-
-    cartpole_agent.decay_epsilon()
-
-# #! Lets save the trained thing
-
-with open("src/simulation/cartpole.pkl", "wb") as f:
-    trained_q_values = dict(cartpole_agent.q_values)
-    pickle.dump(trained_q_values, f)
-print("Q Table Saved to cartpole.pkl")
-
-# objects = pd.read_pickle('src/simulation/cartpole.pkl')
-# trained_q_values = dict(objects)
-
-# print("Q Table Saved to cartpole.pkl")
-
-# * Now lets try the trained thing
-try:
-    env.close()
-    env = gym.make("CartPole-v1", render_mode="human")
-
-    inference_agent = CartPoleAgent(
+    
+    # * Lets train this son of a gun
+    cartpole_agent = CartPoleAgent(
         env=env,
-        learning_rate=0,
-        initial_epsilon=0,  # The Q values should not change and the model should not act randomly.
-        epsilon_decay=0,
-        final_epsilon=0,
+        learning_rate=0.09,
+        initial_epsilon=1.0,
+        epsilon_decay=(
+            1.0 / (number_of_episodes / 2)
+        ),  # (initial_epsilon/(number_of_episodes/2))
+        final_epsilon=0.1,
+        discount_factor=0.95,
     )
-    # inference_agent.q_values = cartpole_agent.q_values
-    inference_agent.q_values = trained_q_values
-    obs, _ = env.reset()
-    total_reward = 0
-    while True:
-        # Choose an action: 0 = push cart left, 1 = push cart right
-        action = inference_agent.get_action(obs=obs)
 
-        # Take the action and see what happens
-        observation, reward, terminated, truncated, _ = env.step(action)
+    for episode in tqdm(range(number_of_episodes)):
 
-        # reward: +1 for each step the pole stays upright
-        # terminated: True if pole falls too far (agent failed)
-        # truncated: True if we hit the time limit (500 steps)
+        observation, info = env.reset()
+        done = False
 
-        total_reward += reward
-        episode_over = terminated or truncated
+        while not done:
+            action = cartpole_agent.get_action(obs=observation)
 
-        if terminated or truncated:
-            print(f"Episode finished! Total Reward: {total_reward}")
-            break
+            next_observation, reward, terminated, truncated, info = env.step(action=action)
 
-        obs = observation
-    env.close()
-except KeyboardInterrupt as e:
+            cartpole_agent.update(
+                obs=observation,
+                action=action,
+                reward=reward,
+                terminated=terminated,
+                next_obs=next_observation,
+            )
 
-    env.close()
+            done = terminated or truncated
+            observation = next_observation
+
+        cartpole_agent.decay_epsilon()
+
+    # #! Lets save the trained thing
+
+    with open("src/simulation/cartpole.pkl", "wb") as f:
+        trained_q_values = dict(cartpole_agent.q_values)
+        pickle.dump(trained_q_values, f)
+    print("Q Table Saved to cartpole.pkl")
+
+
