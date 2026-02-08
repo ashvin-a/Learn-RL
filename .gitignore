@@ -1,3 +1,4 @@
 env/
 install/
 .vscode/
+__pycache__/
