@@ -3,9 +3,9 @@
 I will be developing this tutorial for everyone who is interested to tryout reinforcement learning through doing hands-on projects. We will start simple and eventually will build up the complexity of the project. I plan to cover some topics in **OpenAI Gym** and simulation in **Gazebo** and **Isaac Sim** using **ROS2**. Please forgive any mistakes that you find. The project structure is a bit messy since I'm also in the process of figuring it out. You're more than welcome to put issues and pull requests for improving this repository. Let's grow together!
 
 # Sections
-1. [Initial Setup](https://github.com/ashvin-a/Learn-RL/edit/main/README.md#setup)
-2. [Building Cartpole Agent](https://github.com/ashvin-a/Learn-RL/edit/main/README.md#1-cartpole-agent)
-3. [Building Walker2D](https://github.com/ashvin-a/Learn-RL/edit/main/README.md#2-walker2d)
+1. [Initial Setup](https://github.com/ashvin-a/Learn-RL#setup)
+2. [Building Cartpole Agent](https://github.com/ashvin-a/Learn-RL/#1-cartpole-agent)
+3. [Building Walker2D](https://github.com/ashvin-a/Learn-RL/#2-walker2d)
 
    
 # Setup
