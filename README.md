@@ -43,6 +43,6 @@ We will be using a simple agent, i.e, `CartPole-V1`, for this project. Here, the
 <img src="https://github.com/ashvin-a/Learn-RL/blob/main/src/assets/cartpole/cartpole.gif">
 
 ## 2. Walker2D
-This is a little more complicated. We now have multiple joints, and we have a lot more states and actions for this agent. Let's first write a script for it to stand still.
+This is a little more complicated. We now have multiple joints, and we have a lot more states and actions for this agent. Let's first train the agent to stay alive and keep hoping.
 
 
