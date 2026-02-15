@@ -5,7 +5,7 @@ from stable_baselines3 import PPO
 env = gym.make("Walker2d-v4", render_mode="human")
 
 # 2. Load Model
-model = PPO.load("src\simulation\simulation\walker2d\walker2d_policy")
+model = PPO.load("walker2d_policy")
 
 # 3. Enjoy Loop
 obs, _ = env.reset()
