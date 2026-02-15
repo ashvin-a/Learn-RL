@@ -3,3 +3,4 @@ Shimmy==2.0.0
 stable_baselines3==2.7.1
 tqdm==4.67.3
 pygame==2.6.1
+gymnasium[mujoco]
