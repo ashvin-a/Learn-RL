@@ -2,10 +2,10 @@ import gymnasium as gym
 from stable_baselines3 import PPO
 
 # 1. Load Env with Human Render Mode
-env = gym.make("Walker2d-v4", render_mode="human")
+env = gym.make("Walker2d-v5", render_mode="human")
 
 # 2. Load Model
-model = PPO.load("walker2d_policy")
+model = PPO.load("walker2d_policy_1")
 
 # 3. Enjoy Loop
 obs, _ = env.reset()
