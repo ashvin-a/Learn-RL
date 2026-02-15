@@ -32,13 +32,13 @@ pip install -r requirements.txt
 ```
 Yay! Now you've completed the setup! You can try running the trained Cartpole agent by running:
 ```
-python src/simulation/simulation/cartpole_test.py
+python src/simulation/simulation/cartpole/cartpole_test.py
 ```
 
 
 # Projects
 ## 1. Cartpole Agent 
-We will be using a simple agent, i.e, `CartPole-V1`, for this project. Here, the goal will be to balance the stick like an inverted pendulum. You could check out `src/simulation/simulation/cartpole.py` for training the agent. You could try out the model by running `cartpole_test.py`.
+We will be using a simple agent, i.e, `CartPole-V1`, for this project. Here, the goal will be to balance the stick like an inverted pendulum. You could check out `src/simulation/simulation/cartpole/cartpole.py` for training the agent. You could try out the model by running `cartpole_test.py`.
 
 <img src="https://github.com/ashvin-a/Learn-RL/blob/main/src/assets/cartpole/cartpole.gif">
 
