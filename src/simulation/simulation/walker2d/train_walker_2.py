@@ -23,8 +23,8 @@ class TargetVelocityWrapper(gym.RewardWrapper):
         return 1.0 - (2.0 * velocity_error)
 
 
-def make_env(env_id):
-    env = gym.make(env_id)
+def make_env():
+    env = gym.make("Walker2d-v5")
     return TargetVelocityWrapper(env=env, target_vel=1.5)
 
 
@@ -40,7 +40,7 @@ def train_second_iteration():
     # Create Vectorized Environment
     # Here, we try to stack the last 4 framees for better learning of where
     # the legs are.
-    env = DummyVecEnv([make_env(env_id=env_id)])
+    env = DummyVecEnv([make_env])
     env = VecFrameStack(env, n_stack=4)
     
     # Initialize the Agent
