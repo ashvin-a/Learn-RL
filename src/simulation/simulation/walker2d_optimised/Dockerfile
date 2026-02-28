@@ -23,8 +23,11 @@ RUN apt-get update && apt-get install -y \
 # Upgrade pip
 RUN python3 -m pip install --upgrade pip
 
-# Install PyTorch (CPU version for sim, change to CUDA if using NVIDIA runtime)
 # Using CPU here to keep it simple, but for heavy RL you'll want the nvidia-docker base
+RUN apt-get remove -y python3-sympy && \
+    apt-get autoremove -y
+
+# Install PyTorch (CPU version for sim, change to CUDA if using NVIDIA runtime)
 RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 # Install RL, MuJoCo, and ROS2 bridging packages
