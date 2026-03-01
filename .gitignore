@@ -2,3 +2,5 @@ env/
 install/
 .vscode/
 __pycache__/
+build/
+log/

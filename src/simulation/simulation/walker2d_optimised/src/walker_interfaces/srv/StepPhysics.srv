@@ -1,0 +1,17 @@
+
+# --- REQUEST ---
+# The actions (joint torques) chosen by the Stable Baselines3 agent.
+# For Walker2D, this is typically an array of 6 continuous values.
+float64[] action
+---
+# --- RESPONSE ---
+# The new observation state (joint angles, velocities, etc.)
+float64[] observation
+
+# Foot contact flags: [Left Foot Contact, Right Foot Contact]
+# We explicitly return this so our Gym wrapper can calculate the anti-hopping reward!
+bool[] foot_contacts
+
+# RL control flags
+bool terminated  # True if the robot fell over (failure state)
+bool truncated   # True if we hit the maximum episode length (timeout)

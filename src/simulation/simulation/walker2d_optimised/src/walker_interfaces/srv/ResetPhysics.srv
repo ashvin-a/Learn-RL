@@ -1,0 +1,6 @@
+# --- REQUEST ---
+# Empty request to trigger the reset
+---
+# --- RESPONSE ---
+# Returns the initial starting observation state of the robot
+float64[] observation
