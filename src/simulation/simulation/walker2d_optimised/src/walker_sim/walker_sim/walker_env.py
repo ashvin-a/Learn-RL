@@ -64,6 +64,12 @@ class ROS2WalkerEnv(gym.Env):
         forward_vel = obs[8] 
         reward = float(forward_vel)  # Primary goal: move forward!
         
+        # New reward for anti-jerky movements
+        # np.sum(np.square(action)) calculates the total magnitude of the torques applied.
+        # If that is reduced, robot should learn to use less torque
+        ctrl_cost = 0.001 * np.sum(np.square(action))
+        reward -= float(ctrl_cost)
+
         # Symmetry / Bipedal Shaping
         if right_contact and left_contact:
             # Both feet on the ground (standing/double support) - small bonus
