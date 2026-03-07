@@ -10,7 +10,7 @@ def train_first_iteration():
     # Configuration
     env_id = "Walker2d-v5"
     num_envs = 12  # Number of parallel environments (adjust based on CPU cores)
-    total_timesteps = 4_000_000  # 4 Million steps (needed for a good walker)
+    total_timesteps = 10_000_000  # 4 Million steps (needed for a good walker)
 
     # Check for GPU
     device = "cuda" if torch.cuda.is_available() else "cpu"
