@@ -57,3 +57,7 @@ pip install -r requirements.txt
 In the `src/simulation/simulation/walker2d` directory, we have 4 scripts - two are for training the policy, and two for testing each of them out. For the demo, I trained the policy using `train_walker_1.py`, and the model is saved in `walker2d_policy_1.zip`. `train_walker_2.py` is an attempt to create a custom environment where we could fine-tune the reward function to include constraints to speed so that the walker will move slowly. It is completed, but the policy that was generated from that training has some issue that needs to be resolved. In the meantime, you could try out `train_walker_1.py` for training and `test_walker_1.py` for trying out the walk policies.
 
 
+By employing Soft Actor-Critic(SAC) instead of PPO, you could get an even better walk policy with a much lesser time step.
+
+<img src="https://github.com/ashvin-a/Learn-RL/blob/main/src/assets/walker2d/walker2d_sac.gif">
+
