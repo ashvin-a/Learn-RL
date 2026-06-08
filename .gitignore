@@ -4,3 +4,4 @@ install/
 __pycache__/
 build/
 log/
+.env
